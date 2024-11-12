@@ -22,9 +22,20 @@
         <h6>Select the Analysis you would like to see:</h6>
         <select id="selDataset" onchange="optionChanged(this.value)">
           <option value="">--Select an option--</option>
-          <option value="dataset1">UFO Sightings by Latitude and Longitude</option>
-          <option value="dataset2">Political Affiliation Classification Report</option>
-          <option value="dataset3">Dataset 3</option>
+          <option value="UFOlatlong">UFO Sightings by Latitude and Longitude</option>
+          <option value="Pol">Political Affiliation Classification Report</option>
+          <option value="AZ">Arizona</option>
+          <option value="Heat">US Heat Map</option>
+          <option value="Cities">US Cities Map</option>
+          <option value="Missile">Missile Launch</option>
+          <option value="When">When?</option>
+          <option value="IL">Illinois</option>
+          <option value="shape">shape_map</option>
+          <option value="ufo_map">ufo_map</option>
+          <option value="simple">ufo_simple</option>
+          <option value="shapes">ufo_shapes</option>
+          <option value="player">year_player</option>
+          <option value="slider">year_slider</option>
         </select>
       </div>
     </div>
@@ -41,32 +52,63 @@
 
   <script>
     function optionChanged(value) {
-      const iframe = document.getElementById("datasetFrame");
+      const datasetFrame = document.getElementById("datasetFrame");
       const textContent = document.getElementById("textContent");
 
-      // Clear the iframe and text content
-      iframe.style.display = "none";
+      // Clear previous content
+      datasetFrame.style.display = "none";
       textContent.style.display = "none";
       textContent.textContent = ""; // Clear previous text content
 
-      // Set the iframe source or display text file based on the selected dataset
-      if (value === "dataset1") {
-        iframe.src = "./images/UFO_lat_long_scatterplot.html";  // Load UFO.html in iframe
-        iframe.style.display = "block";  // Show the iframe
-      } else if (value === "dataset2") {
-        // Load and display the Political Affiliation Classification Report text file
+      if (value === "UFOlatlong") {
+        datasetFrame.src = "./images/UFO_lat_long_scatterplot.html";  // Load HTML file in iframe
+        datasetFrame.style.display = "block";  // Show the iframe
+      } else if (value === "Pol") {
         fetch('./images/classification_report.txt')
           .then(response => response.text())
           .then(data => {
-            textContent.textContent = data;  // Display text file content
-            textContent.style.display = "block";  // Show the text content
+            textContent.textContent = data;
+            textContent.style.display = "block";
           })
           .catch(error => {
             console.error('Error loading the text file:', error);
           });
-      } else {
-        iframe.style.display = "none";  // Hide the iframe for other options
-        textContent.style.display = "none";  // Hide text content
+      } else if (value === "AZ") {
+        // Open the Tableau link in a new tab
+        window.open("https://public.tableau.com/app/profile/darell.johnson/viz/shared/SBJP9QZCK", "_blank");
+      } else if (value === "Heat") {
+        // Open the Tableau link in a new tab
+        window.open("https://public.tableau.com/app/profile/darell.johnson/viz/USHotSpots/USHotSpot", "_blank");
+      } else if (value === "Cities") {
+        // Open the Tableau link in a new tab
+        window.open("https://public.tableau.com/app/profile/darell.johnson/viz/HottestCities/CityHotSpot", "_blank");
+      } else if (value === "Missile") {
+        // Open the Tableau link in a new tab
+        window.open("https://public.tableau.com/app/profile/darell.johnson/viz/MissileLaunch/919Cone7-8PM", "_blank");
+      } else if (value === "When") {
+        // Open the Tableau link in a new tab
+        window.open("https://public.tableau.com/app/profile/darell.johnson/viz/When_17310402849880/Dashboard1", "_blank");
+      } else if (value === "IL") {
+        // Open the Tableau link in a new tab
+        window.open("https://public.tableau.com/app/profile/darell.johnson/viz/Il04-05/Dashboard1", "_blank");
+      } else if (value === "shape") {
+        datasetFrame.src = "./HTML/shape_map.html";  // Load HTML file in iframe
+        datasetFrame.style.display = "block";  // Show the iframe
+      } else if (value === "ufo_map") {
+        datasetFrame.src = "./HTML/ufo_map.html";  // Load HTML file in iframe
+        datasetFrame.style.display = "block";  // Show the iframe
+      } else if (value === "simple") {
+        datasetFrame.src = "./HTML/ufo_map_simple.html";  // Load HTML file in iframe
+        datasetFrame.style.display = "block";  // Show the iframe
+      } else if (value === "shapes") {
+        datasetFrame.src = "./HTML/ufo_map_with_shapes.html";  // Load HTML file in iframe
+        datasetFrame.style.display = "block";  // Show the iframe
+      } else if (value === "player") {
+        datasetFrame.src = "./HTML/year_player.html";  // Load HTML file in iframe
+        datasetFrame.style.display = "block";  // Show the iframe
+      } else if (value === "slider") {
+        datasetFrame.src = "./HTML/year_player.html";  // Load HTML file in iframe
+        datasetFrame.style.display = "block";  // Show the iframe
       }
     }
   </script>
