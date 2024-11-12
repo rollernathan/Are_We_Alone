@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Are We Alone - Presentation</title>
+
+  <!-- Google Fonts for Bungee Hairline -->
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Hairline&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <!-- Load the Tableau JavaScript API -->
+  <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.8.0.min.js"></script>
+
+  <style>
+    /* Set the UFO image as the background */
+    body {
+      background: url('images/Picture1.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: 'Bungee Hairline', sans-serif;
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    /* Optional overlay for readability */
+    .background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding-top: 50px;
+    }
+
+    /* Header styling */
+    h1 {
+      font-size: 66px;
+      color: #fff;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    /* Continuous fade-in and fade-out for each letter */
+    .header-animation span {
+      opacity: 0;
+      animation: fadeInOutLetters 6s ease-in-out infinite;
+      animation-delay: calc(0.3s * var(--i));
+    }
+
+    /* Define fade-in and fade-out animations */
+    @keyframes fadeInOutLetters {
+      0%, 20%, 100% { opacity: 0; }
+      30%, 80% { opacity: 1; }
+    }
+
+    /* Shooting star effect styling */
+    .shooting-star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 0px 0px 6px 2px rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      animation: shootingStarAnimation linear infinite;
+    }
+
+    /* Slower shooting star animation */
+    @keyframes shootingStarAnimation {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      50% { opacity: 1; transform: translate(80vw, -80vh) scale(1.3); }
+      100% { opacity: 0; transform: translate(120vw, -120vh) scale(0.6); }
+    }
+
+    /* New clickable options styling with dropdown effect */
+    .clickable-options {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .clickable-option-container {
+      display: inline-block;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      background-color: rgba(255, 255, 255, 0.8);
+      transition: background-color 0.3s;
+    }
+    .clickable-option {
+      color: #333;
+      text-decoration: none;
+      font-size: 18px;
+      display: block;
+      padding: 8px 15px;
+      text-align: center;
+    }
+    .clickable-option:hover {
+      background-color: rgba(255, 255, 255, 1);
+      border-radius: 8px;
+    }
+
+    /* UFO Fly-by Transition Overlay */
+    .ufo-overlay {
+      position: fixed;
+      top: 0;
+      left: -20vw;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .ufo-overlay img {
+      width: 15%;
+      max-width: 200px;
+      transform: translateX(-100vw) translateY(0);
+      transition: transform 1s linear;
+    }
+
+    /* Fly-by animation */
+    .ufo-overlay.fly-by img {
+      transform: translateX(120vw) translateY(-20vh);
+    }
+  </style>
+</head>
+<body>
+  <!-- UFO overlay for transition effect -->
+  <div class="ufo-overlay" id="ufoOverlay">
+    <img src="images/Alien_ship.png" alt="UFO">
+  </div>
+
+  <div class="background-overlay"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 p-5 text-center">
+        <!-- Header with continuous fade-in/out animation -->
+        <h1 class="header-animation">
+          <span style="--i:1">A</span>
+          <span style="--i:2">r</span>
+          <span style="--i:3">e</span>
+          <span style="--i:4"> </span>
+          <span style="--i:5">W</span>
+          <span style="--i:6">e</span>
+          <span style="--i:7"> </span>
+          <span style="--i:8">A</span>
+          <span style="--i:9">l</span>
+          <span style="--i:10">o</span>
+          <span style="--i:11">n</span>
+          <span style="--i:12">e</span>
+          <span style="--i:13">?</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- New Clickable Options Section with dropdown containers -->
+    <div class="clickable-options">
+      <div class="clickable-option-container">
+        <a href="data.html" class="clickable-option" onclick="navigateToPage(event, 'data.html')">Data Analysis</a>
+      </div>
+      <div class="clickable-option-container">
+        <a href="interactive-maps.html" class="clickable-option" onclick="navigateToPage(event, 'interactive-maps.html')">Interactive Maps</a>
+      </div>
+      <div class="clickable-option-container">
+        <a href="machine-learning.html" class="clickable-option" onclick="navigateToPage(event, 'machine-learning.html')">Machine Learning</a>
+      </div>
+      <div class="clickable-option-container">
+        <a href="https://nuforc.org" class="clickable-option" target="_blank">Resources</a>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Embedded Google Slides Presentation (Manual Navigation) -->
+    <div class="row mt-5">
+      <div class="col-md-12 text-center">
+        <h2>Presentation</h2>
+        <iframe src="https://docs.google.com/presentation/d/1moEGNkwc2zugdToHmKwBg3sj7ndJwU88RhsfLfNwfeg/embed?loop=false&delayms=3000" 
+                width="90%" height="600" frameborder="0" allowfullscreen="true"></iframe>
+      </div>
+    </div>
+
+    <!-- Container for Tableau map -->
+    <div class="row mt-4">
+      <div class="col-md-12 text-center">
+        <div id="tableauViz" style="width: 100%; height: 600px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let viz; // This will hold the Tableau visualization instance
+
+    // JavaScript to create random shooting stars on the page with a slower speed
+    function createShootingStar() {
+      const shootingStar = document.createElement("div");
+      shootingStar.classList.add("shooting-star");
+      shootingStar.style.left = Math.random() * 100 + "vw";
+      shootingStar.style.top = Math.random() * 50 + "vh";
+      shootingStar.style.animationDuration = Math.random() * 3 + 2 + "s"; // Slower speed
+      document.body.appendChild(shootingStar);
+
+      // Remove the shooting star after animation completes
+      setTimeout(() => shootingStar.remove(), 3000); // Extended duration for each star
+    }
+
+    // Generate shooting stars at random intervals
+    setInterval(createShootingStar, 1000); // Frequency of shooting stars
+
+    // Function to handle the UFO fly-by transition on page change
+    function navigateToPage(event, url) {
+      event.preventDefault();
+      const overlay = document.getElementById('ufoOverlay');
+      
+      // Add fly-by effect class
+      overlay.classList.add('fly-by');
+
+      // Navigate to the target URL once the animation completes
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000); // Match the delay with the animation duration
+    }
+  </script>
+</body>
+</html>
